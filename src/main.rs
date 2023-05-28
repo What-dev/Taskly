@@ -118,7 +118,7 @@ fn delete() {
 
 fn main() {
     println!("Welcome to Taskly! To get started, please input what you'd like to do, or return to exit! (add, list, or delete)");
-    loop {
+
         let mut menuinput = String::new();
         io::stdin()
             .read_line(&mut menuinput)
@@ -127,27 +127,27 @@ fn main() {
         menuinput = menuinput.trim().to_string();
 
         if menuinput.is_empty() {
-            break;
+
         }
 
         match menuinput.trim() {
             "add" => {
                 add();
-                break;
+
             }
             "list" => {
                 list();
-                break;
+
             }
             "delete" => {
                 delete();
-                break;
+
             }
             _ => {
                 println!("Please enter a valid input.");
-                break;
+
             }
-        }
+        
     }
 }
 
