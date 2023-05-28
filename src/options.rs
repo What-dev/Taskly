@@ -10,7 +10,7 @@ pub fn add() {
     let file_path = format!("{}/{}", folder_path, file_name);
 
     // Create the folder if it doesn't exist
-    std::fs::create_dir_all(folder_path).expect("Failed to create folder.");
+    fs::create_dir_all(folder_path).expect("Failed to create folder.");
 
     // Open the file in append mode
     let mut file = OpenOptions::new()
