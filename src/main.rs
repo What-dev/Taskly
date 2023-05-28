@@ -1,6 +1,5 @@
 #![allow(non_snake_case)]
 use std::io::{self};
-use std::process::exit;
 mod options;
 
 fn main() {
