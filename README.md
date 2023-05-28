@@ -1,4 +1,4 @@
-# Taskly: a task list for the clinically insane :3
+# Taskly: a task list for the clinically insane
 
 Taskly is a simple list creator that allows you to add, delete, list, or edit (Coming soon) 
 
