@@ -41,7 +41,7 @@ fn add() {
 }
 
 fn list() {
-    let file_path = format!("Taskly/taskly.txt");
+    let file_path = "Taskly/taskly.txt";
     match fs::read_to_string(file_path) {
         Ok(contents) => {
             println!("File contents:");
@@ -56,7 +56,7 @@ fn list() {
 }
 
 fn delete() {
-    let file_path = format!("Taskly/taskly.txt");
+    let file_path = "Taskly/taskly.txt";
     let contents = match fs::read_to_string(&file_path) {
         Ok(contents) => contents,
         Err(err) => {
@@ -76,7 +76,7 @@ fn delete() {
         .expect("Failed to read line");
 
     if input.trim() == "bomb" {
-    match fs::remove_file(file_path.clone()) {
+    match fs::remove_file(file_path) {
         Ok(()) => println!("File deleted successfully."),
         Err(err) => println!("Error deleting file: {}", err),
         }
