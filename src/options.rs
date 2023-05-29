@@ -112,3 +112,64 @@ pub fn delete() {
     }
     
 }
+
+pub fn edit() {
+    let file_path = "Taskly/taskly.txt";
+    let contents = match fs::read_to_string(file_path) {
+        Ok(contents) => contents,
+        Err(err) => {
+            println!("Error reading file: {}", err);
+
+            return;
+        }
+    };
+
+    println!("File contents:");
+    println!("{}", contents);
+
+    println!("Enter the number of the task you want to edit:");
+    let mut input = String::new();
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line");
+
+        let task_number: usize = match input.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input. Please enter a valid number.");
+
+                return;
+            }
+        };
+        //add a function that takes an input and stores it in task_edited
+        println!("Enter the new task:");
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
+        let task_edited = input.trim().to_string();
+
+        let tasks: Vec<&str> = contents.lines().collect();
+        if task_number >= 1 && task_number <= tasks.len() {
+            let updated_tasks: Vec<String> = tasks
+                .iter()
+                .enumerate()
+                .map(|(i, &task)| {
+                    if i == task_number - 1 {
+                        // Modify the task here
+                        task_edited.to_string()
+                    } else {
+                        task.to_string()
+                    }
+                })
+                .collect();
+
+            let updated_content = updated_tasks.join("\n");
+            match fs::write(file_path, updated_content) {
+                Ok(_) => println!("Task edited successfully!"),
+                Err(err) => println!("Error editing task: {}", err),
+            }
+        } else {
+            println!("Invalid task number. Please enter a valid number.");
+        }
+}

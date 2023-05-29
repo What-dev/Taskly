@@ -4,7 +4,7 @@ mod options;
 
 fn main() {
     loop{
-        println!("Welcome to Taskly! To get started, please input what you'd like to do, or press enter/return to exit! (add, list, or delete)");
+        println!("Welcome to Taskly! To get started, please input what you'd like to do, or press enter/return to exit! (add, edit, list, or delete)");
 
         let mut menuinput = String::new();
         io::stdin()
@@ -16,10 +16,13 @@ fn main() {
         if menuinput.is_empty() {
 
         }
-        //TODO: add a way to edit tasks
+
         match menuinput.trim() {
             "add" => {
                 options::add();
+            }
+            "edit" => {
+                options::edit();
             }
             "list" => {
                 options::list();
