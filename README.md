@@ -18,4 +18,22 @@ Taskly is a simple list creator that allows you to add, delete, list, or edit an
 ```bash
 cargo build --release
 ```
+## Updates
+#### NEW FEATURE
 
+- Implemented command line args for add (You can now do `taskly add task_name`replacing task_name with the name of your task)
+
+
+- Inhanced the help menu and core UX
+
+## TODO list:
+- [ ] add task descriptions (might be tricky bc I suck at Rust)
+- [ ] add task due dates (again, tricky, but both could use the same storage system so it might not be too bad)
+- [ ] add task priority 
+- [ ] add task tags
+- [ ] make a neater looking menu
+- [ ] add a way to view tasks by priority
+
+## Closing Notes
+#### This is my first Rust project, and it's tricky to balence Taskly's development with school and extra curriculars, so don't hold your breath for any of the TODO items.  
+#### But if you see anything that could be improved, please let me know! I'm always looking to improve my code and learn new things.
