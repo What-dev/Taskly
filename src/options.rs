@@ -1,8 +1,10 @@
 use std::io::{self, Write};
 use std::fs::OpenOptions;
 use std::fs;
+use std::option::Option;
 
-pub fn add() {
+
+pub fn add(cmd_input: Option<String>) {
     println!("Input a task to be added to your list:");
 
     let folder_path = "Taskly";
@@ -19,22 +21,34 @@ pub fn add() {
         .open(&file_path)
         .expect("Failed to open file.");
 
-    loop {
-        let mut input = String::new();
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Failed to read line");
-
-        input = input.trim().to_string();
-
-        if input.is_empty() {
-            break;
+    let mut input = String::new();
+    if let Some(cmd_input_str) = cmd_input {
+        if cmd_input_str.len() > 1 {
+            input = cmd_input_str;
         }
+    }
 
+    if input.is_empty() {
+        loop {
+            io::stdin()
+                .read_line(&mut input)
+                .expect("Failed to read line");
+
+            input = input.trim().to_string();
+
+            if input.is_empty() {
+                break;
+            }
+
+            writeln!(file, "{}", input).expect("Failed to write to file.");
+
+            println!("Successfully added '{}', to your Taskly list!", input);
+
+            input.clear();
+        }
+    } else {
         writeln!(file, "{}", input).expect("Failed to write to file.");
-
         println!("Successfully added '{}', to your Taskly list!", input);
-
     }
 
     println!("File created successfully at: {}", file_path);
