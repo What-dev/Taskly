@@ -60,14 +60,76 @@ pub fn list() {
         Ok(contents) => {
             println!("File contents:");
             println!("{}", contents);
-    
+
         }
         Err(err) => {
             println!("Error reading file: {}", err);
-    
+
         }
     }
 }
+
+pub fn complete(number: Option<String>) {
+    let file_path = "Taskly/taskly.txt";
+    let contents = match fs::read_to_string(file_path) {
+        Ok(contents) => contents,
+        Err(err) => {
+            println!("Error reading file: {}", err);
+            return;
+        }
+    };
+
+    println!("File contents:");
+    println!("{}", contents);
+
+    let task_number: usize = match number {
+        Some(cmd_input_str) => match cmd_input_str.parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input. Please enter a valid number.");
+                return;
+            }
+        },
+        None => {
+            let mut input = String::new();
+            println!("Enter the number of the task you want to complete:");
+            io::stdin()
+                .read_line(&mut input)
+                .expect("Failed to read line");
+            match input.trim().parse() {
+                Ok(num) => num,
+                Err(_) => {
+                    println!("Invalid input. Please enter a valid number.");
+                    return;
+                }
+            }
+        }
+    };
+
+    let tasks: Vec<String> = contents.lines().map(|task| task.to_string()).collect();
+    if task_number >= 1 && task_number <= tasks.len() {
+        let updated_tasks: Vec<String> = tasks
+            .iter()
+            .enumerate()
+            .map(|(i, task)| {
+                if i == task_number - 1 {
+                    format!("\x1B[9m{}\x1B[0m - Completed", task)
+                } else {
+                    task.to_string()
+                }
+            })
+            .collect();
+
+        let updated_content = updated_tasks.join("\n");
+        match fs::write(file_path, updated_content) {
+            Ok(()) => println!("Task completed successfully."),
+            Err(err) => println!("Error completing task: {}", err),
+        }
+    } else {
+        println!("Invalid task number. Please enter a valid number.");
+    }
+}
+
 
 pub fn delete() {
     let file_path = "Taskly/taskly.txt";
@@ -75,7 +137,7 @@ pub fn delete() {
         Ok(contents) => contents,
         Err(err) => {
             println!("Error reading file: {}", err);
-    
+
             return;
         }
     };
@@ -101,7 +163,7 @@ pub fn delete() {
         Ok(num) => num,
         Err(_) => {
             println!("Invalid input. Please enter a valid number.");
-    
+
             return;
         }
     };
@@ -124,7 +186,7 @@ pub fn delete() {
         println!("Invalid task number. Please enter a valid number.");
     }
     }
-    
+
 }
 
 pub fn edit() {

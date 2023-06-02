@@ -21,10 +21,8 @@ cargo build --release
 ## Updates
 #### NEW FEATURE
 
-- Implemented command line args for add (You can now do `taskly add task_name`replacing task_name with the name of your task)
+- Added the complete option, which allows you to mark a task as complete using **Taskly complete (the number of the task)**.
 
-
-- Inhanced the help menu and core UX
 
 ## TODO list:
 - [ ] add task descriptions (might be tricky bc I suck at Rust)
@@ -33,7 +31,8 @@ cargo build --release
 - [ ] add task tags
 - [ ] make a neater looking menu
 - [ ] add a way to view tasks by priority
+- [ ] gui using gtk-rs (maybe, idk how to use any gui library yet so we'll see)
 
 ## Closing Notes
-#### This is my first Rust project, and it's tricky to balence Taskly's development with school and extra curriculars, so don't hold your breath for any of the TODO items.  
-#### But if you see anything that could be improved, please let me know! I'm always looking to improve my code and learn new things.
+#### I'm planning a bigger update now that basic features are implemented to the back-end that will utilize json to store data more efficiently than txt files that were simple when I didn't know much.
+### TLDR: Taskly v2: Electric Boogaloo
