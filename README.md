@@ -1,6 +1,6 @@
-# Taskly: a task list for the clinically insane
+# Taskly V2: Electric Boogaloo
 
-Taskly is a simple list creator that allows you to add, delete, list, or edit any of your big-brained tasks in one easy-to-use command line app! 
+Taskly is a simple list creator that allows you to add and modify any of your big-brained tasks in one easy-to-use command line app! 
 
 ## Installation
 
@@ -19,9 +19,10 @@ Taskly is a simple list creator that allows you to add, delete, list, or edit an
 cargo build --release
 ```
 ## Updates
-#### NEW FEATURE
+#### V2 is here with the help of Chat Gipity to teach me how to use serde!
+- You can now delete tasks by their completion status!
 
-- Added the complete option, which allows you to mark a task as complete using **Taskly complete (the number of the task)**.
+
 
 
 ## TODO list:
@@ -34,5 +35,7 @@ cargo build --release
 - [ ] gui using gtk-rs (maybe, idk how to use any gui library yet so we'll see)
 
 ## Closing Notes
-#### I'm planning a bigger update now that basic features are implemented to the back-end that will utilize json to store data more efficiently than txt files that were simple when I didn't know much.
-### TLDR: Taskly v2: Electric Boogaloo
+#### V1 was converted into V2 in a little over an hour because everything was already set up, I just needed to learn how to use serde_json to pack it into the json file we use now!
+## What's next?
+#### everything in the todo list above since everything is now modular with a main Task struct that holds all the data for each task, so adding new features should be a breeze!
+

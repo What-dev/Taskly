@@ -6,6 +6,7 @@ mod options;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+    //println!("Command-line arguments: {:?}", args);
     if args.len() > 1 {
         let cmd_input: Option<String> = if args.len() > 2 {
             Some(args[2].clone())
@@ -45,7 +46,7 @@ fn main() {
         }
     } else {
         loop {
-            println!("Welcome to Taskly! To get started, please input what you'd like to do, or press enter/return to exit! (add, edit, list, or delete)");
+            println!("Welcome to Taskly! To get started, run Taskly help to see a list of commands.");
 
             let mut menuinput = String::new();
             io::stdin()
