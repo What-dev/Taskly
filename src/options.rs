@@ -88,25 +88,80 @@ pub fn add(cmd_input: Option<String>) {
     println!("File created successfully at: {}", file_path);
 }
 
-pub fn list() {
-    let file_path = "Taskly/taskly.json";
-    match fs::read_to_string(file_path) {
-        Ok(contents) => {
-           match serde_json::from_str::<Vec<Task>>(&contents) {
-                Ok(tasks) => {
-                    println!("Your Taskly list:");
-                    for (index, task) in tasks.iter().enumerate() {
-                        println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+pub fn list(list_input: Option<String>) {
+
+    let mut input = String::new();
+    if let Some(list_input_str) = list_input {
+        if list_input_str.len() > 1 {
+            input = list_input_str;
+        }
+    }
+
+    if input.is_empty() {
+        let file_path = "Taskly/taskly.json";
+        match fs::read_to_string(file_path) {
+            Ok(contents) => {
+                match serde_json::from_str::<Vec<Task>>(&contents) {
+                    Ok(tasks) => {
+                        println!("Your Taskly list:");
+                        for (index, task) in tasks.iter().enumerate() {
+                            println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+                        }
+                    }
+                    Err(err) => {
+                        println!("Error parsing file content as JSON: {}", err);
                     }
                 }
-                Err(err) => {
-                    println!("Error parsing file content as JSON: {}", err);
-                }
+            }
+            Err(err) => {
+                println!("Error reading file: {}", err);
             }
         }
-        Err(err) => {
-            println!("Error reading file: {}", err);
-
+    }
+    else if input == "uncompleted" {
+        let file_path = "Taskly/taskly.json";
+        match fs::read_to_string(file_path) {
+            Ok(contents) => {
+                match serde_json::from_str::<Vec<Task>>(&contents) {
+                    Ok(tasks) => {
+                        println!("Your Taskly list:");
+                        for (index, task) in tasks.iter().enumerate() {
+                            if !task.completed {
+                                println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+                            }
+                        }
+                    }
+                    Err(err) => {
+                        println!("Error parsing file content as JSON: {}", err);
+                    }
+                }
+            }
+            Err(err) => {
+                println!("Error reading file: {}", err);
+            }
+        }
+    }
+    else if input == "completed" {
+        let file_path = "Taskly/taskly.json";
+        match fs::read_to_string(file_path) {
+            Ok(contents) => {
+                match serde_json::from_str::<Vec<Task>>(&contents) {
+                    Ok(tasks) => {
+                        println!("Your Taskly list:");
+                        for (index, task) in tasks.iter().enumerate() {
+                            if task.completed {
+                                println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+                            }
+                        }
+                    }
+                    Err(err) => {
+                        println!("Error parsing file content as JSON: {}", err);
+                    }
+                }
+            }
+            Err(err) => {
+                println!("Error reading file: {}", err);
+            }
         }
     }
 }
@@ -196,7 +251,7 @@ pub fn delete() {
         println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
     }
 
-    println!("Enter the number of the task you want to delete [or type 'bomb' to completely annihilate the taskly file >:), or 'completed' to delete completed tasks only]:");
+    println!("Enter the number of the task you would like to delete, or remove all with 'bomb', completed tasks with 'completed', or uncompleted tasks with 'uncompleted':");
     let mut input = String::new();
     io::stdin()
         .read_line(&mut input)
@@ -216,6 +271,14 @@ pub fn delete() {
         match fs::write(file_path, updated_content) {
             Ok(()) => println!("Completed tasks deleted successfully!"),
             Err(err) => println!("Error deleting completed tasks: {}", err),
+        }
+    } else if input == "uncompleted" {
+        tasks.retain(|task| task.completed);
+
+        let updated_content = serde_json::to_string_pretty(&tasks).unwrap();
+        match fs::write(file_path, updated_content) {
+            Ok(()) => println!("Uncompleted tasks deleted successfully!"),
+            Err(err) => println!("Error deleting uncompleted tasks: {}", err),
         }
     } else {
         let task_number: usize = match input.parse() {
@@ -239,6 +302,7 @@ pub fn delete() {
         }
     }
 }
+
 pub fn edit() {
     let file_path = "Taskly/taskly.json";
 

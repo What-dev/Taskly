@@ -19,23 +19,24 @@ Taskly is a simple list creator that allows you to add and modify any of your bi
 cargo build --release
 ```
 ## Updates
-#### V2 is here with the help of Chat Gipity to teach me how to use serde!
-- You can now delete tasks by their completion status!
+- added delete uncompleted
+- added list completed and uncompleted to easily sort
+- fixed help command not working if ran from the start menu
 
 
 
 
 ## TODO list:
-- [ ] add task descriptions (might be tricky bc I suck at Rust)
-- [ ] add task due dates (again, tricky, but both could use the same storage system so it might not be too bad)
+- [ ] add task descriptions (Simple with the new storage system, so won't be too bad)
+- [ ] add task due dates
 - [ ] add task priority 
 - [ ] add task tags
-- [ ] make a neater looking menu
-- [ ] add a way to view tasks by priority
-- [ ] gui using gtk-rs (maybe, idk how to use any gui library yet so we'll see)
+- [ ] make a neater looking menu (tui-rs looks like a neat lib for this)
+- [ ] add a way to view/sort tasks by priority
+- [ ] add a way to view/sort tasks by tag
 
 ## Closing Notes
-#### V1 was converted into V2 in a little over an hour because everything was already set up, I just needed to learn how to use serde_json to pack it into the json file we use now!
+#### small update, nothing changed internally but with V2 this project actually has some sort of potential.
 ## What's next?
 #### everything in the todo list above since everything is now modular with a main Task struct that holds all the data for each task, so adding new features should be a breeze!
 

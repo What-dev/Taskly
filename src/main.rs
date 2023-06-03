@@ -6,7 +6,6 @@ mod options;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    //println!("Command-line arguments: {:?}", args);
     if args.len() > 1 {
         let cmd_input: Option<String> = if args.len() > 2 {
             Some(args[2].clone())
@@ -32,7 +31,7 @@ fn main() {
                 options::complete(cmd_input);
             }
             "list" => {
-                options::list();
+                options::list(cmd_input);
             }
             "delete" => {
                 options::delete();
@@ -70,10 +69,13 @@ fn main() {
                     options::complete(None);
                 }
                 "list" => {
-                    options::list();
+                    options::list(None);
                 }
                 "delete" => {
                     options::delete();
+                }
+                "help" => {
+                    println!("Taskly Command Line Arguments:\n     add (optional input) - Add a task to your list\n     edit - Edit a task on your list\n     list - List all tasks on your list\n     complete (optional task number) - marks a task as completed \n     delete - Delete a task from your list\n     help - Display this help message");
                 }
                 _ => {
                     break;
@@ -82,3 +84,4 @@ fn main() {
         }
     }
 }
+
