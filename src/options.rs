@@ -10,7 +10,7 @@ pub struct Task {
     pub completed: bool,
 }
 
-pub fn add(cmd_input: Option<String>) {
+pub fn add(add_input: Option<String>) {
     println!("Input a task to be added to your list:");
 
     let folder_path = "Taskly";
@@ -32,9 +32,9 @@ pub fn add(cmd_input: Option<String>) {
     }
 
     let mut input = String::new();
-    if let Some(cmd_input_str) = cmd_input {
-        if cmd_input_str.len() > 1 {
-            input = cmd_input_str;
+    if let Some(add_input_str) = add_input {
+        if add_input_str.len() > 1 {
+            input = add_input_str;
         }
     }
 
