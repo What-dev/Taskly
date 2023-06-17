@@ -187,7 +187,7 @@ pub fn complete(number: Option<String>) {
 
     println!("Your Taskly list:");
     for (index, task) in tasks.iter().enumerate() {
-        println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+        println!("{}: {} - Completed: {} - Description: '{}'", index + 1, task.name, task.completed, task.desc);
     }
 
     let task_number: usize = match number {
@@ -324,7 +324,7 @@ pub fn edit() {
 
     println!("Your Taskly list:");
     for (index, task) in tasks.iter().enumerate() {
-        println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+        println!("{}: {} - Completed: {} - Description: '{}'", index + 1, task.name, task.completed, task.desc);
     }
 
     println!("Enter the number of the task you want to edit:");
