@@ -19,15 +19,12 @@ Taskly is a simple list creator that allows you to add and modify any of your bi
 cargo build --release
 ```
 ## Updates
-- added delete uncompleted
-- added list completed and uncompleted to easily sort
-- fixed help command not working if ran from the start menu
+- added descriptions to tasks! (requires a new taskly.json file, please delete the old one using ```taskly delete```)
 
 
 
 
 ## TODO list:
-- [ ] add task descriptions (Simple with the new storage system, so won't be too bad)
 - [ ] add task due dates
 - [ ] add task priority 
 - [ ] add task tags

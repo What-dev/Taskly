@@ -7,6 +7,7 @@ use std::path::Path;
 #[derive(Serialize, Deserialize)]
 pub struct Task {
     pub name: String,
+	pub desc: String,
     pub completed: bool,
 }
 
@@ -30,13 +31,15 @@ pub fn add(add_input: Option<String>) {
         tasks = serde_json::from_str(&file_content)
             .expect("Failed to parse file content as JSON.");
     }
-
+	//input defines
     let mut input = String::new();
     if let Some(add_input_str) = add_input {
         if add_input_str.len() > 1 {
             input = add_input_str;
         }
     }
+	//this one too
+	let mut desc = String::new();
 
     if input.is_empty() {
         loop {
@@ -44,6 +47,11 @@ pub fn add(add_input: Option<String>) {
                 .read_line(&mut input)
                 .expect("Failed to read line");
 
+			println!("Input a description for your task:");
+			io::stdin()
+				.read_line(&mut desc)
+				.expect("Failed to read line");
+			desc = desc.trim().to_string();
             input = input.trim().to_string();
 
             if input.is_empty() {
@@ -52,24 +60,28 @@ pub fn add(add_input: Option<String>) {
 
             let task = Task {
                 name: input.clone(),
+				desc: desc.clone(),
                 completed: false,
             };
 
             tasks.push(task);
 
-            println!("Successfully added '{}', to your Taskly list!", input);
-
+            println!("Successfully added '{}' - '{}', to your Taskly list!", input, desc);
+			println!("Input a task to be added to your list:");
             input.clear();
+			desc.clear();
         }
     } else {
         let task = Task {
             name: input.clone(),
+			desc: desc.clone(),
             completed: false,
         };
 
         tasks.push(task);
 
-        println!("Successfully added '{}', to your Taskly list!", input);
+        println!("Successfully added '{}' - '{}', to your Taskly list!", input, desc);
+		println!("Input a task to be added to your list:");
     }
 
     // Save the updated tasks to the file
@@ -105,7 +117,7 @@ pub fn list(list_input: Option<String>) {
                     Ok(tasks) => {
                         println!("Your Taskly list:");
                         for (index, task) in tasks.iter().enumerate() {
-                            println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+                            println!("{}: {} - Completed: {} - Description: {}", index + 1, task.name, task.completed, task.desc);
                         }
                     }
                     Err(err) => {
@@ -127,7 +139,7 @@ pub fn list(list_input: Option<String>) {
                         println!("Your Taskly list:");
                         for (index, task) in tasks.iter().enumerate() {
                             if !task.completed {
-                                println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+                                println!("{}: {} - Completed: {} - Description: {}", index + 1, task.name, task.completed, task.desc);
                             }
                         }
                     }
@@ -150,7 +162,7 @@ pub fn list(list_input: Option<String>) {
                         println!("Your Taskly list:");
                         for (index, task) in tasks.iter().enumerate() {
                             if task.completed {
-                                println!("{}: {} - Completed: {}", index + 1, task.name, task.completed);
+                                println!("{}: {} - Completed: {} - Description: {}", index + 1, task.name, task.completed, task.desc);
                             }
                         }
                     }
